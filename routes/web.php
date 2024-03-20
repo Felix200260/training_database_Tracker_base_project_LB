@@ -2,6 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\GoalController;
+use App\Http\Controllers\UserController;
+
+Route::resource('/goals', GoalController::class, 'index');
+Route::resource('/users', UserController::class, 'index');
+
+// Route::resource('/goals', GoalController::class);
+// Route::resource('/users', UserController::class);
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
