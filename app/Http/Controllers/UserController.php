@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -11,8 +12,12 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::all();
+        return view('users', ['users' => $users]);
     }
+
+    // $goals = Goal::all();
+    //     return view('goals', ['goals' => $goals]);
 
     /**
      * Show the form for creating a new resource.
