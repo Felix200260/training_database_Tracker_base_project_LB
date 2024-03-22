@@ -40,7 +40,9 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return view('user1', [
+            'user' => User::all()->where('id',$id)->first(),
+        ]);
     }
 
     /**

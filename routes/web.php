@@ -8,8 +8,10 @@ use App\Http\Controllers\UserController;
 // Route::resource('/goals', GoalController::class, 'index');
 // Route::resource('/users', UserController::class, 'index');
 
-Route::resource('/goals', GoalController::class);
-Route::resource('/users', UserController::class);
+Route::get('/goals', [GoalController::class, 'index']);
+Route::get('/user/{id}', [UserController::class, 'show']);
+Route::get('/users', [UserController::class, 'index']);
+
 
 /*
 |--------------------------------------------------------------------------
