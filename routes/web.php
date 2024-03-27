@@ -23,7 +23,8 @@ Route::get('/users/edit/{id}', [UserController::class, 'edit']);
 
 Route::put('/users/{id}', [UserController::class, 'update']);
 
-Route::delete('/users/{id}', [UserController::class, 'destroy']);
+// Route::delete('/users/{id}', [UserController::class, 'destroy']);
+Route::delete('/users', [UserController::class, 'destroy']);
 
 
 /*
