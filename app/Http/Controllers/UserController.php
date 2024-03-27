@@ -24,7 +24,12 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        // Создаем новый экземпляр модели User для формы.
+        $user = new User();
+        // Возвращаем представление user_create с экземпляром User.
+        return view('user_create', [
+            'user' => $user
+        ]);
     }
 
     /**
@@ -32,8 +37,29 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'username' => 'required|unique:users|max:255',
+            'email' => 'required|unique:users|email|max:255',
+            'password' => 'required|min:6',
+            'first_name' => 'max:255', // предположим, что имя необязательно и может быть не уникальным
+            'last_name' => 'max:255',  // предположим, что фамилия необязательна и может быть не уникальной
+        ]);
+
+        // Хэширование пароля перед сохранением
+        $validated['password'] = bcrypt($validated['password']);
+
+        $user = new User($validated);
+        $user->username = $validated['username'];
+        $user->email = $validated['email'];
+        $user->password = $validated['password'];
+        $user->first_name = $validated['first_name'];
+        $user->last_name = $validated['last_name'];
+        $user->save();
+
+        // Вероятно, вы захотите перенаправить пользователя на список пользователей
+        return redirect('/users');
     }
+
 
     /**
      * Display the specified resource.
