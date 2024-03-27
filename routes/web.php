@@ -19,6 +19,9 @@ Route::get('/users/create', [UserController::class, 'create']);
 // Обработка отправленной формы и сохранение нового пользователя/ обрабатывает POST-запросы и используется для приёма данных из формы и создания нового пользователя в базе данных.
 Route::post('/users', [UserController::class, 'store']);
 
+Route::get('/users/edit/{id}', [UserController::class, 'edit']);
+
+Route::put('/users/{id}', [UserController::class, 'update']);
 
 /*
 |--------------------------------------------------------------------------
