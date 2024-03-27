@@ -13,6 +13,8 @@ Route::get('/user/{id}', [UserController::class, 'show']);
 //обрабатывает GET-запросы и используется для отображения списка всех пользователей.
 Route::get('/users', [UserController::class, 'index']);
 
+
+//-----------------------Лабараторная работа Разработка методов CRUD---------------------------
 // Отображение формы для создания нового пользователя
 Route::get('/users/create', [UserController::class, 'create']);
 
@@ -23,8 +25,9 @@ Route::get('/users/edit/{id}', [UserController::class, 'edit']);
 
 Route::put('/users/{id}', [UserController::class, 'update']);
 
-// Route::delete('/users/{id}', [UserController::class, 'destroy']);
-Route::delete('/users', [UserController::class, 'destroy']);
+Route::delete('/users/{id}', [UserController::class, 'destroy']);
+// Route::delete('/users', [UserController::class, 'destroy']);
+//-----------------------Лабараторная работа Разработка методов CRUD---------------------------
 
 
 /*
