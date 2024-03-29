@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\GoalController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\LoginController;
 
 // Route::resource('/goals', GoalController::class, 'index');
 // Route::resource('/users', UserController::class, 'index');
@@ -28,6 +29,16 @@ Route::put('/users/{id}', [UserController::class, 'update']);
 Route::delete('/users/{id}', [UserController::class, 'destroy']);
 // Route::delete('/users', [UserController::class, 'destroy']);
 //-----------------------Лабараторная работа Разработка методов CRUD---------------------------
+//-----------------------Лабараторная работа Аутентификация пользователя с использованием метода Auth::attempt---------------------------
+Route::get('/login', [LoginController::class, 'login']);
+
+Route::get('/logout', [LoginController::class, 'logout']);
+
+Route::post('/auth', [LoginController::class, 'authenticate']);
+
+//-----------------------Лабараторная работа Аутентификация пользователя с использованием метода Auth::attempt---------------------------
+
+
 
 
 /*
