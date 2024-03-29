@@ -35,6 +35,7 @@
             @endforeach
             </tbody>
         </table>
+        {{ $users->links() }} {{-- Вставляем здесь --}}
     @else
         <p>Пользователи не найдены.</p>
     @endif
