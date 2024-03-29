@@ -7,6 +7,18 @@
 </head>
 <body>
     <h2>Список пользователей</h2>
+
+    <nav>
+        Элементов на странице:
+        <form method="get" action="{{ url('users') }}">
+            <select name="perpage" onchange="this.form.submit()">
+                <option value="2" @if(request('perpage') == 2) selected @endif>2</option>
+                <option value="3" @if(request('perpage') == 3) selected @endif>3</option>
+                <option value="4" @if(request('perpage') == 4) selected @endif>4</option>
+            </select>
+        </form>
+    </nav>
+
     @if($users->count())
         <table border="1">
             <thead>

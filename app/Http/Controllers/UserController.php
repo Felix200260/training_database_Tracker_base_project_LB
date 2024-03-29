@@ -12,7 +12,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(2);
+        // Получаем значение perpage из запроса или используем значение по умолчанию 2
+        $perPage = request('perpage', 2);
+
+        $users = User::paginate($perPage);
         return view('users', ['users' => $users]);
     }
 
