@@ -35,6 +35,11 @@ Route::post('/auth', [LoginController::class, 'authenticate']);
 // Маршрут /login теперь имеет имя 'login', используемое в middleware 'auth'
 // Это имя используется для перенаправления неаутентифицированных пользователей на страницу входа
 
+// Лабораторная работа: Авторизация пользователей с помощью Gate
+Route::get('/error', function () {
+    return view('error',  ['message' => session('message')]);
+});
+
 // Базовый маршрут для страницы приветствия
 Route::get('/', function () {
     return view('welcome');
