@@ -7,11 +7,11 @@
     
     <!-- Сообщения об ошибках и успехе -->
     @if(session('error'))
-        <div class="alert alert-danger">{{ session('error') }}</div>
+        <div class="alert alert-danger">{{ session('error') }}</div> <!-- Тут добавлено сообщение об ошибке из сессии -->
     @endif
 
     @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
+        <div class="alert alert-success">{{ session('success') }}</div> <!-- Тут добавлено сообщение об успехе из сессии -->
     @endif
 
     <h1>Добавить новую цель</h1>
@@ -21,11 +21,17 @@
         <div class="mb-3">
             <label for="name_goal" class="form-label">Название цели</label>
             <input type="text" class="form-control" id="name_goal" name="name_goal" required>
+            @error('name_goal') <!-- Вывод сообщения об ошибке для поля 'name_goal' -->
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-3">
             <label for="description" class="form-label">Описание</label>
             <input type="text" class="form-control" id="description" name="description">
+            @error('description') <!-- Вывод сообщения об ошибке для поля 'description' -->
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-3">
@@ -35,6 +41,9 @@
                     <option value="{{ $priority->id }}">{{ $priority->priorities_level }}</option>
                 @endforeach
             </select>
+            @error('priorities_id') <!-- Вывод сообщения об ошибке для поля 'priorities_id' -->
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <div class="mb-3">
@@ -44,6 +53,9 @@
                     <option value="{{ $status->id }}">{{ $status->statuses_description }}</option>
                 @endforeach
             </select>
+            @error('statuses_id') <!-- Вывод сообщения об ошибке для поля 'statuses_id' -->
+            <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
         </div>
 
         <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
