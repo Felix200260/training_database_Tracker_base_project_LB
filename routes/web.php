@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GoalController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ItemController;
 
 // Обработка маршрутов для целей и пользователей
 Route::get('/goals', [GoalController::class, 'index']);
@@ -39,6 +40,13 @@ Route::post('/auth', [LoginController::class, 'authenticate']);
 Route::get('/error', function () {
     return view('error');
 });
+
+
+// Регистрация маршрута для метода create
+Route::get('/items/create', [ItemController::class, 'create'])->name('items.create');
+
+Route::post('/items', [ItemController::class, 'store'])->name('items.store');
+
 
 // Базовый маршрут для страницы приветствия
 Route::get('/', function () {
