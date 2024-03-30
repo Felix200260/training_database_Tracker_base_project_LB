@@ -15,10 +15,13 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials)) 
+        {
+            // dd(Auth::user()); // Выведет информацию о пользователе
             $request->session()->regenerate();
 
-            return redirect()->intended('login');
+            // return redirect()->intended('login');
+            return view('home', ['user' => Auth::user()]);
         }
 
         return back()->withErrors([

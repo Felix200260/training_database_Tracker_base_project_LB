@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+use App\Models\Item;
 
 class UserController extends Controller
 {
@@ -121,7 +123,24 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        User::destroy($id);
-        return redirect('/users')->with('success', 'Пользователь был удалён.');
+        $user = User::findOrFail($id);
+
+        // Проверка прав пользователя на удаление через Gate
+        // Gate 'delete-user' должен быть определен в AuthServiceProvider и
+        // проверять наличие заглавных букв в email пользователя
+        if (!Gate::allows('delete-user', $user)) {
+            // Если Gate возвращает false, сохраняем сообщение об ошибке в флэш-сессию
+            // и перенаправляем на страницу ошибки
+            return redirect('/error')->with('message', "У вас нет разрешения на удаление пользователя с email {$user->email}");
+        }
+
+        // Если Gate возвращает true, удаляем пользователя
+        $user->delete();
+
+        // Сохраняем сообщение об успешном действии в флэш-сессию
+        // и перенаправляем на список пользователей
+        return redirect('/users')->with('success', "Пользователь с email {$user->email} был удалён.");
     }
+
+
 }

@@ -37,7 +37,7 @@ Route::post('/auth', [LoginController::class, 'authenticate']);
 
 // Лабораторная работа: Авторизация пользователей с помощью Gate
 Route::get('/error', function () {
-    return view('error',  ['message' => session('message')]);
+    return view('error');
 });
 
 // Базовый маршрут для страницы приветствия
