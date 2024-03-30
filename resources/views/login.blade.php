@@ -8,8 +8,8 @@
     </style>
 </head>
 <body>
-@if($user)
-    <h2>Здравствуйте, {{ $user->name }}</h2>
+@if(auth()->check())
+    <h2>Здравствуйте, {{ auth()->user()->name }}</h2>
     <a href="{{ url('logout') }}">Выйти из системы</a>
 @else
     <h2>Вход в систему</h2>

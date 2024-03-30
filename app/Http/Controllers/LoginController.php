@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth; // Добавлено для использования Auth
-use Illuminate\Http\RedirectResponse; // Добавьте этот импорт для RedirectResponse
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
 
 class LoginController extends Controller
 {
@@ -15,22 +15,19 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
-        if (Auth::attempt($credentials)) 
-        {
-            // dd(Auth::user()); // Выведет информацию о пользователе
+        if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-
-            // return redirect()->intended('login');
-            return view('home', ['user' => Auth::user()]);
+            return redirect()->intended('login'); // Используем перенаправление на список целей
         }
 
         return back()->withErrors([
             'error' => 'The provided credentials do not match our records.',
         ])->onlyInput('email', 'password');
     }
-    public function login(Request $request)
+
+    public function login()
     {
-        return view('login', ['user' => Auth::user()]);
+        return view('login');
     }
 
     public function logout(Request $request): RedirectResponse
@@ -38,8 +35,6 @@ class LoginController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('login');
+        return redirect('login'); // Используем перенаправление
     }
-
-
 }

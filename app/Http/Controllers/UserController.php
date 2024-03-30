@@ -114,7 +114,7 @@ class UserController extends Controller
         $user->fill($validatedData);
         $user->save();
 
-        return redirect('/users')->with('success', 'User updated successfully!');
+        return redirect('/users')->with('success', 'Пользователь обновлен успешно!');
     }
 
 
