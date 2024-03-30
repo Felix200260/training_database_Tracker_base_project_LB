@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Goal;
+use App\Models\Status;
+use App\Models\Priority;
 use Illuminate\Http\Request;
 
 class GoalController extends Controller
@@ -21,7 +23,11 @@ class GoalController extends Controller
      */
     public function create()
     {
-        //
+        // Передаем в представление список статусов и приоритетов
+        // предполагая, что у вас есть соответствующие модели и таблицы в базе данных
+        $statuses = Status::all();
+        $priorities = Priority::all();
+        return view('create_goal', compact('statuses', 'priorities'));
     }
 
     /**
@@ -29,7 +35,27 @@ class GoalController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Убедитесь, что пользователь аутентифицирован
+        if (!auth()->check()) {
+            return redirect('/login')->with('error', 'Для добавления цели необходимо войти в систему.');
+        }
+        // Валидация входящего запроса
+        $validatedData = $request->validate([
+            'name_goal' => 'required|max:255',
+            'description' => 'nullable|max:255',
+            'priorities_id' => 'required|exists:priorities,id',
+            'statuses_id' => 'required|exists:statuses,id',
+            // Убеждаемя, что 'user_id' принадлежит текущему аутентифицированному пользователю
+            'user_id' => 'required|exists:users,id|in:'.auth()->id(),
+        ]);
+
+        // Создание новой цели
+        $goal = new Goal($validatedData);
+        $goal->user_id = auth()->id(); // Установка ID пользователя
+        $goal->save();
+
+        // Перенаправление обратно к списку целей с сообщением об успехе
+        return redirect('/goals')->with('success', 'Цель успешно добавлена.');
     }
 
     /**

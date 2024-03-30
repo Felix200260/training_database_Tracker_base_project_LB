@@ -47,6 +47,13 @@ Route::get('/items/create', [ItemController::class, 'create'])->name('items.crea
 
 Route::post('/items', [ItemController::class, 'store'])->name('items.store');
 
+//Для создания целей
+// Регистрация маршрута для создания цели
+Route::get('/goals/create', [GoalController::class, 'create'])->name('goals.create')->middleware('auth');
+// Регистрация маршрута для сохранения цели
+Route::post('/goals', [GoalController::class, 'store'])->name('goals.store')->middleware('auth');
+
+
 
 // Базовый маршрут для страницы приветствия
 Route::get('/', function () {

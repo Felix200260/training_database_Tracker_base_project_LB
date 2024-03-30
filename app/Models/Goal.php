@@ -13,6 +13,15 @@ class Goal extends Model
     // Указываем, что эта модель связана с таблицей goals
     protected $table = 'goals';
 
+    // Массив, указывающий, какие атрибуты могут быть массово назначены
+    protected $fillable = [
+        'name_goal',
+        'description',
+        'priorities_id',
+        'statuses_id',
+        'user_id',
+    ];
+
     // Добавляем отношение к пользователю - каждая цель принадлежит одному пользователю
     public function user()
     {
