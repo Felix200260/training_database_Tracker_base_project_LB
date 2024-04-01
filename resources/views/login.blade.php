@@ -11,9 +11,9 @@
     </style>
 </head>
 <body>
-@include('header') 
+@include('header')
 @if(auth()->check())
-    <h2>Здравствуйте, {{ auth()->user()->name }}</h2>
+    <h2>Здравствуйте {{ auth()->user()->name }}</h2>
     <a href="{{ url('logout') }}">Выйти из системы</a>
 @else
     <h2>Вход в систему</h2>

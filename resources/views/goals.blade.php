@@ -9,10 +9,12 @@
     <!-- Добавьте ссылки на CSS здесь, если это необходимо -->
 </head>
 <body>
-    @include('header') 
+    <header>
+        @include('header') 
+    </header>
     <h2>Список целей</h2>
-    <table border="1">
-        <thead>
+    <table class="table table-hover table-responsive">
+        <thead class="table-light">
             <tr>
                 <th>ID</th>
                 <th>Название цели</th>

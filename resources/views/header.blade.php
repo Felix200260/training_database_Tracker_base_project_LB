@@ -16,14 +16,22 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/users') }}">Пользователи</a>
                 </li>
-                <!-- Добавьте дополнительные пункты меню по необходимости -->
+                @if(Auth::check())
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/goals/create') }}">Создать цель</a>
+                    </li>
+                @endif
             </ul>
 
             <!-- Правая часть навигационной панели -->
             <ul class="navbar-nav ms-auto">
                 @if(Auth::check())
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('logout') }}">Выйти ({{ Auth::user()->name }})</a>
+                        <!-- Используйте форму для отправки POST запроса для выхода -->
+                        <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                            @csrf
+                            <button type="submit" class="btn btn-link nav-link">Выйти ({{ Auth::user()->name }})</button>
+                        </form>
                     </li>
                 @else
                     <li class="nav-item">
