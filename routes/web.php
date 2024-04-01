@@ -8,7 +8,7 @@ use App\Http\Controllers\ItemController;
 
 // Обработка маршрутов для целей и пользователей
 Route::get('/goals', [GoalController::class, 'index']);
-Route::get('/user/{id}', [UserController::class, 'show']);
+Route::get('/user/{id}', [UserController::class, 'show']); ###
 Route::get('/users', [UserController::class, 'index']);
 
 // Лабораторная работа: Разработка методов CRUD
@@ -30,21 +30,23 @@ Route::middleware('auth')->group(function () {
 // Маршруты для аутентификации
 Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::get('/logout', [LoginController::class, 'logout']);
-Route::post('/auth', [LoginController::class, 'authenticate']);
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout'); #обработка вызода пользователя
+Route::post('/auth', [LoginController::class, 'authenticate']); ###
 
 // Лабораторная работа: Защита маршрутов от доступа неаутентифицированных пользователей
 // Маршрут /login теперь имеет имя 'login', используемое в middleware 'auth'
 // Это имя используется для перенаправления неаутентифицированных пользователей на страницу входа
 
 // Лабораторная работа: Авторизация пользователей с помощью Gate
-Route::get('/error', function () {
+Route::get('/error', function () { ###
     return view('error');
 });
 
 
 // Регистрация маршрута для метода create
-Route::get('/items/create', [ItemController::class, 'create'])->name('items.create');
-
+#Тест--------------------------------------
+Route::get('/items/create', [ItemController::class, 'create'])->name('items.create'); 
+#Тест--------------------------------------
 Route::post('/items', [ItemController::class, 'store'])->name('items.store');
 
 //Для создания целей
