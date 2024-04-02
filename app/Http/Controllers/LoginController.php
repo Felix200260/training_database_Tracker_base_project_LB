@@ -17,7 +17,8 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('login'); // Используем перенаправление на список целей
+            $request->session()->flash('status', 'Успешный вход. Ваш email: ' . Auth::user()->email);
+            return redirect()->intended('/goals/create');
         }
 
         return back()->withErrors([
@@ -35,6 +36,8 @@ class LoginController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('login'); // Используем перенаправление
+        return redirect('/login')->with('status', 'Вы вышли из системы.');
     }
+
+
 }

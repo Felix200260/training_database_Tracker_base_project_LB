@@ -13,6 +13,11 @@
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div> <!-- Тут добавлено сообщение об успехе из сессии -->
     @endif
+    @if (session('status'))
+    <div class="alert alert-success">
+        {{ session('status') }}
+    </div>
+    @endif
 
     <h1>Добавить новую цель</h1>
 

@@ -58,6 +58,9 @@ Route::post('/goals', [GoalController::class, 'store'])->name('goals.store')->mi
 
 
 // Базовый маршрут для страницы приветствия
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 Route::get('/', function () {
-    return view('welcome');
+    return view('login');
 });
